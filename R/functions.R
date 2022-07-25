@@ -1,13 +1,21 @@
 #' @title Jaccard Distance
 #' @description Calculate Jaccard distance between two vectors
+<<<<<<< HEAD
 #' @param a A vector.
+=======
+#' #' @param a A vector.
+>>>>>>> 661fb783d47c9768f2fac50309ab297c738490cd
 #' @param b A vector.
 #' @return Jaccard distance calculated as the ratio between the intersection and the union of the two vectors.
 #' @details DETAILS
 #' @examples 
 #' \dontrun{
 #' if(interactive()){
+<<<<<<< HEAD
 #'  jaccard(c('A','B','C','D','E'), c('A','B','C'))
+=======
+#'  jaccard(c('A','B','C','D','E'), c('A','B'))
+>>>>>>> 661fb783d47c9768f2fac50309ab297c738490cd
 #'  }
 #' }
 #' @rdname jaccard
@@ -26,7 +34,11 @@ jaccard <- function(a, b) {
 #' @examples 
 #' \dontrun{
 #' if(interactive()){
+<<<<<<< HEAD
 #' redundancy(c('A','B','C','D','E'), c('A','B','C'))
+=======
+#' redundancy(c('A','B','C','D','E'), c('A','B'))
+>>>>>>> 661fb783d47c9768f2fac50309ab297c738490cd
 #'  }
 #' }
 #' @rdname redundancy
@@ -36,7 +48,11 @@ redundancy <- function(a, b) {
   min = min(length(a),length(b))
   return (intersection/min)
 }
+<<<<<<< HEAD
 #' @title Range between 0 and 1
+=======
+#' @title Range [0,1]
+>>>>>>> 661fb783d47c9768f2fac50309ab297c738490cd
 #' @description Normalize absolute values of a numeric vector
 #' @param x A numeric vector.
 #' @return Normalized values (x-min(x))/(max(x)-min(x))

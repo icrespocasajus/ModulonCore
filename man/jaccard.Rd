@@ -7,8 +7,11 @@
 jaccard(a, b)
 }
 \arguments{
+<<<<<<< HEAD
 \item{a}{A vector.}
 
+=======
+>>>>>>> 661fb783d47c9768f2fac50309ab297c738490cd
 \item{b}{A vector.}
 }
 \value{
@@ -16,6 +19,10 @@ Jaccard distance calculated as the ratio between the intersection and the union 
 }
 \description{
 Calculate Jaccard distance between two vectors
+<<<<<<< HEAD
+=======
+#' @param a A vector.
+>>>>>>> 661fb783d47c9768f2fac50309ab297c738490cd
 }
 \details{
 DETAILS
@@ -23,7 +30,11 @@ DETAILS
 \examples{
 \dontrun{
 if(interactive()){
+<<<<<<< HEAD
  jaccard(c('A','B','C','D','E'), c('A','B','C'))
+=======
+ jaccard(c('A','B','C','D','E'), c('A','B'))
+>>>>>>> 661fb783d47c9768f2fac50309ab297c738490cd
  }
 }
 }
