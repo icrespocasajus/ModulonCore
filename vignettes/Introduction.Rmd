@@ -1,5 +1,5 @@
 ---
-title: "Quick Introduction to ModulonCore"
+title: "Introduction"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{Introduction}
