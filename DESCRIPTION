@@ -1,0 +1,11 @@
+Package: ModulonCore
+Title: Modulon Connected Components Identification
+Version: 1.0
+Authors@R: 
+    person("Isaac", "Crespo", , "isaaccrespo@hotmail.com", role = c("aut", "cre"),
+           comment = c(ORCID = "YOUR-ORCID-ID"))
+Description: ModulonCore finds all connected components within the modulon regulatory network.
+License: MIT + file LICENSE
+Encoding: UTF-8
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.2.0
