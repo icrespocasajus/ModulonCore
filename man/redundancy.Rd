@@ -26,7 +26,6 @@ DETAILS
 \dontrun{
 if(interactive()){
 redundancy(c('A','B','C','D','E'), c('A','B','C'))
-redundancy(c('A','B','C','D','E'), c('A','B'))
  }
 }
 }

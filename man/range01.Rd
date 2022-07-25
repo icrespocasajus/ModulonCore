@@ -2,11 +2,7 @@
 % Please edit documentation in R/functions.R
 \name{range01}
 \alias{range01}
-<<<<<<< HEAD
 \title{Range between 0 and 1}
-=======
-\title{Range \link{0,1}}
->>>>>>> 661fb783d47c9768f2fac50309ab297c738490cd
 \usage{
 range01(x)
 }
