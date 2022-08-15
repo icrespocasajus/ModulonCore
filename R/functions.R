@@ -48,7 +48,7 @@ redundancy <- function(a, b) {
 #' @examples 
 #' \dontrun{
 #' if(interactive()){
-#' redundancy(c('A','B','C','D','E'), c('A','B','C'))
+#' redundancy2(c('A','B','C','D','E'), c('A','B','C'))
 #'  }
 #' }
 #' @rdname redundancy

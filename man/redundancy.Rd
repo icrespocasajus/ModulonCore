@@ -40,7 +40,7 @@ redundancy(c('A','B','C','D','E'), c('A','B','C'))
 }
 \dontrun{
 if(interactive()){
-redundancy(c('A','B','C','D','E'), c('A','B','C'))
+redundancy2(c('A','B','C','D','E'), c('A','B','C'))
  }
 }
 }

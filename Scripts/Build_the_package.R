@@ -26,13 +26,16 @@ usethis::use_travis()
 # sets up testing infrastructure
 usethis::use_testthat()
 
+# this will setup the folders needed for the data and raw-data
+usethis::use_data_raw()
 
 
-
-
-
+# this will generate documentation for your functions
 pacman::p_load(sinew)
-sinew::makeOxyFile("R/fit_models.R")
+sinew::makeOxyFile("R/functions2.R")
+
+# See available functions
+pacman::p_functions("ModulonCore")
 
 devtools::check()# WARNING! Be aware that using check from RStudio build panel is going to wipe out the doc folder; ignettes may stop working properly
 
