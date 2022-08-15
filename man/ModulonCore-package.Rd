@@ -9,7 +9,7 @@
 ModulonCore finds all connected components within the modulon regulatory network.
 }
 \author{
-\strong{Maintainer}: Isaac Crespo \email{isaaccrespo@hotmail.com} (\href{https://orcid.org/YOUR-ORCID-ID}{ORCID})
+\strong{Maintainer}: Isaac Crespo \email{isaaccrespo@hotmail.com} (\href{https://orcid.org/0000-0003-3151-3901}{ORCID})
 
 }
 \keyword{internal}

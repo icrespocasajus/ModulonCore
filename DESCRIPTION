@@ -3,7 +3,7 @@ Title: Modulon Connected Components Identification
 Version: 1.0
 Authors@R: 
     person("Isaac", "Crespo", , "isaaccrespo@hotmail.com", role = c("aut", "cre"),
-           comment = c(ORCID = "YOUR-ORCID-ID"))
+           comment = c(ORCID = "0000-0003-3151-3901"))
 Description: ModulonCore finds all connected components within the modulon regulatory network.
 License: MIT + file LICENSE
 Encoding: UTF-8

@@ -2,10 +2,13 @@
 % Please edit documentation in R/functions.R
 \name{redundancy}
 \alias{redundancy}
+\alias{redundancy2}
 \title{Regulon Redundancy
 Calculate redundancy between two regulons}
 \usage{
 redundancy(a, b)
+
+redundancy2(a, b)
 }
 \arguments{
 \item{a}{A vector.}
@@ -14,15 +17,27 @@ redundancy(a, b)
 }
 \value{
 Redundancy calculated as the ratio between the intersection and the minimum length of the two vectors.
+
+Redundancy calculated as the ratio between the intersection and the minimum length of the two vectors.
 }
 \description{
 Regulon Redundancy
 Calculate redundancy between two regulons
+
+Regulon Redundancy 2
+Calculate redundancy between two regulons
 }
 \details{
 DETAILS
+
+DETAILS
 }
 \examples{
+\dontrun{
+if(interactive()){
+redundancy(c('A','B','C','D','E'), c('A','B','C'))
+ }
+}
 \dontrun{
 if(interactive()){
 redundancy(c('A','B','C','D','E'), c('A','B','C'))

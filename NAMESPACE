@@ -3,3 +3,4 @@
 export(jaccard)
 export(range01)
 export(redundancy)
+export(redundancy2)
