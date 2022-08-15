@@ -46,4 +46,7 @@ dir.create("inst")
 dir.create("inst/doc")
 file.copy(dir("vignettes", full.names=TRUE), "inst/doc", overwrite=TRUE)
 
+browseVignettes('ModulonCore')
+vignette('Introduction','ModulonCore')
+
 
