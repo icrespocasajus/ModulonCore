@@ -37,6 +37,28 @@ redundancy <- function(a, b) {
   min = min(length(a),length(b))
   return (intersection/min)
 }
+
+
+#' @title Regulon Redundancy 2
+#' Calculate redundancy between two regulons
+#' @param a A vector.
+#' @param b A vector.
+#' @return Redundancy calculated as the ratio between the intersection and the minimum length of the two vectors.
+#' @details DETAILS
+#' @examples 
+#' \dontrun{
+#' if(interactive()){
+#' redundancy(c('A','B','C','D','E'), c('A','B','C'))
+#'  }
+#' }
+#' @rdname redundancy
+#' @export 
+redundancy2 <- function(a, b) {
+  intersection = length(intersect(a, b))
+  min = min(length(a),length(b))
+  return (intersection/min)
+}
+
 #' @title Range between 0 and 1
 #' @title Range [0,1]
 #' @description Normalize absolute values of a numeric vector
