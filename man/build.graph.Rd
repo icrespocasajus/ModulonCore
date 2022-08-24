@@ -2,43 +2,28 @@
 % Please edit documentation in R/ModulonCore_functions.R
 \name{build.graph}
 \alias{build.graph}
-\alias{build.igraph}
 \title{Build the graph}
 \usage{
 build.graph(net, weight = WEIGHT)
-
-build.igraph(net)
 }
 \arguments{
-\item{net}{A dataframe with the network encoded in 3 columns:  'Source','Target','Weight'.}
+\item{net}{A dataframe with a network encoded in 3 columns: 'Source','Interaction','Target'.}
 
 \item{weight}{A vector with the weight of each interaction. If none is provided, it will be assumed the same weight (1) for all the interactions}
 }
 \value{
 A dataframe with the network encoded in 3 columns:  'Source','Target','Weight'.
-
-A network as an igraph object
 }
 \description{
 Find all regulatory regulatory events between TFs and add weights for the regulatory interactions
-
-Covert the input network into an igraph object
 }
 \details{
-The resulting network only contains regulatory events between TFs
-
 The resulting network only contains regulatory events between TFs
 }
 \examples{
 \dontrun{
 if(interactive()){
  build.graph(network.TILs)
- }
-}
-\dontrun{
-if(interactive()){
- graph = build.graph(network.TILs)
- build.igraph(graph)
  }
 }
 }
