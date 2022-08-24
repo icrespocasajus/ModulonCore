@@ -51,7 +51,7 @@ build.graph = function(net,weight=WEIGHT){
 #'  build.igraph(graph)
 #'  }
 #' }
-#' @rdname build.graph
+#' @rdname build.igraph
 #' @export 
 build.igraph = function(net){
   network = net
@@ -126,7 +126,7 @@ find.connected.components <- function(net, modulons,mode=MODE,dir=DIR) {
 #'  significance=0.05)
 #'  }
 #' }
-#' @rdname Connectivity analysis
+#' @rdname connectivity
 #' @export 
 connectivity <- function(net,cc, min.size,dist.method,nperm,vertex.attr,edge.attr,significance) {
   modulon.subnetworks.connected.components=cc
@@ -182,7 +182,7 @@ connectivity <- function(net,cc, min.size,dist.method,nperm,vertex.attr,edge.att
 #'  significance=0.05)
 #'  core(results.connectivity=results.connectivity)
 #' }
-#' @rdname Regulatory core identification
+#' @rdname core
 #' @export 
 core <- function(results.connectivity,significance=0.05) {
   modulon.subnetworks.connected.components.SANTA = results.connectivity
@@ -231,7 +231,7 @@ core <- function(results.connectivity,significance=0.05) {
 #'  core.out(net=graph,cc=cc,regulatory.cores=regulatory.cores,dir="./cores)
 #'  }
 #' }
-#' @rdname Print out regulatory core analysis results
+#' @rdname core.out
 #' @export 
 core.out = function(net,cc,regulatory.cores,dir = "./") {
   SANTA.INPUT=cc
