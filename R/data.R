@@ -3,25 +3,23 @@
 #' A dataset containing the transcriptional network inferred using SCENIC pipeline on murine TILs transcriptomics.
 
 #'
-#' @format A dataframe encoding the network: \describe{ \item{x}{a dataframe of dimension
-#'   \code{12490 x 3} with the following colums:\describe{\item{Source}{Transcription factor} \item{Interaction}{Regulatory interaction} \item{Target}{Target gene regulated by the transcription factor}
+#' @format A dataframe encoding the network in 3 columns:'Source','Interaction','Target'
 #' @source \url{https://www.nature.com/articles/s41467-021-23324-4}
 #' @examples
 #' network.TILs
 "network.TILs"
+
 
 #' network.LCMV Data
 #'
 #' A dataset containing the transcriptional network inferred using SCENIC pipeline on murine LCMV transcriptomics.
 
 #'
-#' @format A dataframe encoding the network: \describe{ \item{x}{a dataframe of dimension
-#'   \code{16717 x 3} with the following colums:\describe{\item{Source}{Transcription factor} \item{Interaction}{Regulatory interaction} \item{Target}{Target gene regulated by the transcription factor}
+#' @format A dataframe encoding the network in 3 columns:'Source','Interaction','Target'
 #' @source \url{https://www.nature.com/articles/s41467-021-23324-4}
 #' @examples
 #' network.LCMV
 "network.LCMV"
-
 
 
 
