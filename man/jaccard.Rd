@@ -29,7 +29,7 @@ jaccard(a, b)
 \arguments{
 \item{net}{A list with all the connected components of each modulon}
 
-\item{modulons}{A list.}
+\item{modulons}{A list with as many elements as modulons/clusters containing the constituent elements.}
 
 \item{cc}{A list with all the connected components of each modulon}
 
@@ -39,7 +39,7 @@ jaccard(a, b)
 \item{b}{A vector.}
 }
 \value{
-A list with as many elements as modulons containing the constituent transcripton factors of all the connected components of each modulon
+A list with as many elements as modulons/clusters containing  all the connected components
 
 A list with as many elements as modulons containing the constituent transcripton factors of all the connected components of each modulon
 
@@ -50,7 +50,7 @@ A list with as many elements as modulons containing the constituent transcripton
 Jaccard distance calculated as the ratio between the intersection and the union of the two vectors.
 }
 \description{
-Find all connected components within in modulon
+Find all connected components within modulons or any cluster of genes
 
 Find all regulatory cores within in modulon
 
@@ -61,7 +61,7 @@ Generate files with connected component networks and connected component element
 Calculate Jaccard distance between two vectors
 }
 \details{
-The names of the outpuT list are composed by....
+The names of connected components are encoded as ccX, being 'X' the ID number of the connected component
 
 The names of the outpuT list are composed by....
 
@@ -74,7 +74,9 @@ DETAILS
 \examples{
 \dontrun{
 if(interactive()){
- jaccard(c('A','B','C','D','E'), c('A','B','C'))
+ graph = build.graph(network.TILs)
+ igraph = build.igraph(graph)
+ find.connected.components(net=igraph,modulons = modulons.TILs)
  }
 }
 \dontrun{

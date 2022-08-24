@@ -75,27 +75,20 @@ build.igraph = function(net){
 #'  find.connected.components(net=igraph,modulons = modulons.TILs)
 #'  }
 #' }
-#' @rdname jaccard
+#' @rdname find.connected.components
 #' @export 
 find.connected.components <- function(net, modulons,mode=MODE,dir=DIR) {
   
   mode <- match.arg(mode) # default = "weak"
-  
+
   # Query
   TF.AUC.clusters.TILs=modulons
   
-  # Extract all modulon subnetworks as edge list
-  modulon.subnetworks = lapply(TF.AUC.clusters.TILs,function(x){
-    subnetwork = network[(network$Source %in% x) & (network$Target %in% x),]
-  })
-  
   # Extract all modulon subnetworks as igraph object
-  modulon.subnetworks.igraph = lapply(modulon.subnetworks,function(x){
-    g = igraph::graph_from_edgelist(as.matrix(x[c(1:2)]))
-    E(g)$Weights = x$Weight
-    V(g)$query = 0
-    g
+  modulon.subnetworks.igraph = lapply(TF.AUC.clusters.TILs,function(x){
+    subnetwork = igraph::subgraph(igraph,vids = intersect(names(igraph::V(igraph)),x))
   })
+ 
   # Extract all modulon subnetworks connected components
   modulon.subnetworks.connected.components = lapply(modulon.subnetworks.igraph,function(x){
     res=igraph::components(x, mode = c(mode))
@@ -150,7 +143,7 @@ connectivity <- function(cc, min.size=MINSIZE,dist.method,nperm,vertex.attr,edge
         for (i in 1: length(V(network.igraph))){
           if (identical(as.character(query[j]),vertex_names[i])){
             V(network.igraph)$query[i] = 1;
-            print (paste(as.character(query[j])," equals to ",vertex_names[i]))
+            print (paste(as.character(query[j]),",equals to ",vertex_names[i]))
           }
           else{
             #print("nope");
