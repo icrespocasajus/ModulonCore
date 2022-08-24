@@ -32,12 +32,12 @@ usethis::use_data_raw()
 
 # this will generate documentation for your functions
 pacman::p_load(sinew)
-sinew::makeOxyFile("R/functions2.R")
+sinew::makeOxyFile("R/ModulonCore_functions.R")
 
 # See available functions
 pacman::p_functions("ModulonCore")
 
-devtools::check()# WARNING! Be aware that using check from RStudio build panel is going to wipe out the doc folder; ignettes may stop working properly
+devtools::check()# WARNING! Be aware that using check from RStudio build panel is going to wipe out the doc folder; vignettes may stop working properly
 
 usethis::use_vignette(name = "Introduction")
 
