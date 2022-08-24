@@ -108,41 +108,42 @@ find.connected.components <- function(net, modulons,mode=MODE,dir=DIR) {
 
 
 #' @title SANTA analysis
-#' @description Find all regulatory cores within in modulon
+#' @description Evaluate the statistical support for connected components over-connectivity
 #' @param cc A list with all the connected components of each modulon
-#' @return A list with as many elements as modulons containing the constituent transcripton factors of all the connected components of each modulon
-#' @details The names of the outpuT list are composed by....
+#' @return A list with as many elements as modulons containing the results of the SANTA analysis
+#' @details The results can be plotted as follows: plot(x[[][[]]])
 #' @examples 
 #' \dontrun{
 #' if(interactive()){
-#'  jaccard(c('A','B','C','D','E'), c('A','B','C'))
+#'  graph = build.graph(network.TILs)
+#'  igraph = build.igraph(graph)
+#'  cc=find.connected.components(net=igraph,modulons = modulons.TILs)
+#'  connectivity( cc, min.size='5',
+#'  dist.method="shortest.paths",
+#'  nperm=100,
+#'  vertex.attr="query",
+#'  edge.attr="Weight",
+#'  significance=0.05)
 #'  }
 #' }
-#' @rdname jaccard
+#' @rdname Connectivity analysis
 #' @export 
-connectivity <- function(cc, min.size=MINSIZE,dist.method,nperm,vertex.attr,edge.attr,significance) {
+connectivity <- function(net,cc, min.size,dist.method,nperm,vertex.attr,edge.attr,significance) {
   modulon.subnetworks.connected.components=cc
-  min.size=match.arg(min.size)
   modulon.subnetworks.connected.components.filtered = lapply(modulon.subnetworks.connected.components,function(x){
     x[lapply(x,length)>=as.integer(min.size)]
   })
-  # SANTA analysis
-  #dist.method="shortest.paths"
-  #nperm=100
-  #vertex.attr="query"
-  #edge.attr="Weight"
-  #significance=0.05
-  vertex_names = igraph::get.vertex.attribute(network.igraph,'name')
+  vertex_names = igraph::get.vertex.attribute(net,'name')
   SANTA.INPUT = modulon.subnetworks.connected.components.filtered
   modulon.subnetworks.connected.components.SANTA = lapply(SANTA.INPUT,function(x){
     tmp = lapply(x,function(y){
       query = y
-      V(network.igraph)$query = 0;
+      igraph::V(net)$query = 0;
       
       for (j in 1: length(query)){
-        for (i in 1: length(V(network.igraph))){
+        for (i in 1: length(V(net))){
           if (identical(as.character(query[j]),vertex_names[i])){
-            V(network.igraph)$query[i] = 1;
+            igraph::V(net)$query[i] = 1;
             print (paste(as.character(query[j]),",equals to ",vertex_names[i]))
           }
           else{
@@ -151,7 +152,7 @@ connectivity <- function(cc, min.size=MINSIZE,dist.method,nperm,vertex.attr,edge
         }
       }
       
-      g.clustered = SANTA::Knet(network.igraph, dist.method=dist.method, nperm=nperm, vertex.attr=vertex.attr,edge.attr=edge.attr)
+      g.clustered = SANTA::Knet(net, dist.method=dist.method, nperm=nperm, vertex.attr=vertex.attr,edge.attr=edge.attr)
       return(g.clustered)
     })
     return(tmp)
