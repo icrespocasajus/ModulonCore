@@ -8,6 +8,21 @@ MINSIZE=c('5')
 WEIGHT=c('1')
 
 
+
+
+#' @title Build the graph
+#' @description Find all regulatory regulatory events between TFs and add weights for the regulatory interactions
+#' @param net A dataframe with a network encoded in 3 columns: 'Source','Interaction','Target'.
+#' @param weight A vector with the weight of each interaction. If none is provided, it will be assumed the same weight (1) for all the interactions
+#' @return A dataframe with the network encoded in 3 columns:  'Source','Target','Weight'.
+#' @details The resulting network only contains regulatory events between TFs
+#' @examples 
+#' \dontrun{
+#' if(interactive()){
+#'  build.graph(network.TILs)
+#'  }
+#' }
+#' @rdname build.graph
 #' @export 
 build.graph = function(net,weight=WEIGHT){
   network.SCENIC = net
@@ -23,25 +38,41 @@ build.graph = function(net,weight=WEIGHT){
 }
 
 
+
+#' @title Build the igraph
+#' @description Covert the input network into an igraph object
+#' @param net A dataframe with the network encoded in 3 columns:  'Source','Target','Weight'.
+#' @return A network as an igraph object
+#' @details The resulting network only contains regulatory events between TFs
+#' @examples 
+#' \dontrun{
+#' if(interactive()){
+#'  graph = build.graph(network.TILs)
+#'  build.igraph(graph)
+#'  }
+#' }
+#' @rdname build.graph
 #' @export 
 build.igraph = function(net){
-  network= net
+  network = net
   # Network in igraph format
   network.igraph = igraph::graph_from_edgelist(as.matrix(network[c(1:2)]))
-  E(network.igraph)$Weight = network$Weight
+  igraph::E(network.igraph)$Weight = network$Weight
   return(network.igraph)
 }
 
 #' @title Connected Components Identification
-#' @description Find all connected components within in modulon
-#' @param net A dataframe with the network encoded in three columns with the following column names: 'Source', 'Interaction' and 'Target.
-#' @param modulons A list.
-#' @return A list with as many elements as modulons containing the constituent transcripton factors of all the connected components of each modulon
-#' @details The names of the outpuT list are composed by....
+#' @description Find all connected components within modulons or any cluster of genes
+#' @param net A network as an igraph object
+#' @param modulons A list with as many elements as modulons/clusters containing the constituent elements.
+#' @return A list with as many elements as modulons/clusters containing  all the connected components
+#' @details The names of connected components are encoded as ccX, being 'X' the ID number of the connected component
 #' @examples 
 #' \dontrun{
 #' if(interactive()){
-#'  jaccard(c('A','B','C','D','E'), c('A','B','C'))
+#'  graph = build.graph(network.TILs)
+#'  igraph = build.igraph(graph)
+#'  find.connected.components(net=igraph,modulons = modulons.TILs)
 #'  }
 #' }
 #' @rdname jaccard

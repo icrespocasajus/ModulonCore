@@ -5,8 +5,7 @@
 \alias{network.LCMV}
 \title{network.LCMV Data}
 \format{
-A dataframe encoding the network: \describe{ \item{x}{a dataframe of dimension
-\code{16717 x 3} with the following colums:\describe{\item{Source}{Transcription factor} \item{Interaction}{Regulatory interaction} \item{Target}{Target gene regulated by the transcription factor}
+A dataframe encoding the network in 3 columns:'Source','Interaction','Target'
 }
 \source{
 \url{https://www.nature.com/articles/s41467-021-23324-4}
