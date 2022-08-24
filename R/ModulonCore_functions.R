@@ -86,7 +86,7 @@ find.connected.components <- function(net, modulons,mode=MODE,dir=DIR) {
   
   # Extract all modulon subnetworks as igraph object
   modulon.subnetworks.igraph = lapply(TF.AUC.clusters.TILs,function(x){
-    subnetwork = igraph::subgraph(igraph,vids = intersect(names(igraph::V(igraph)),x))
+    subnetwork = igraph::subgraph(igraph,vids = intersect(names(igraph::V(net)),x))
   })
  
   # Extract all modulon subnetworks connected components
