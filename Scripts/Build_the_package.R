@@ -2,6 +2,11 @@
 usethis::use_description()
 usethis::use_namespace()
 
+# this will setup the folders needed for the data and raw-data
+usethis::use_data_raw()
+#usethis::use_data(data, overwrite = TRUE)# This line should be included in an RScript to generate the data; a second script (data.R) has to be created, 
+# executed and kept in data-raw; a new directory named data with the required files is created
+
 # Create R directory
 base::dir.create("R")
 
