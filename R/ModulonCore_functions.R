@@ -163,20 +163,29 @@ connectivity <- function(net,cc, min.size,dist.method,nperm,vertex.attr,edge.att
 }
 
 
-#' @title Regulatory core
-#' @description Find all regulatory cores within in modulon
-#' @param cc A list with all the connected components of each modulon
-#' @return A list with as many elements as modulons containing the constituent transcripton factors of all the connected components of each modulon
-#' @details The names of the outpuT list are composed by....
+#' @title Regulatory core identification
+#' @description Evaluate the results of the connectivity and collect connected components with statistically supported over-connectivity
+#' @param results.connectivity A list with the ouput of the connectivity analysis
+#' @return A list with all the regulatory cores of each modulon
+#' @details Modulons may have none, one or more than one regulatory cores
 #' @examples 
 #' \dontrun{
 #' if(interactive()){
-#'  jaccard(c('A','B','C','D','E'), c('A','B','C'))
-#'  }
+#'  graph = build.graph(network.TILs)
+#'  igraph = build.igraph(graph)
+#'  cc=find.connected.components(net=igraph,modulons = modulons.TILs)
+#'  results.connectivity=connectivity( cc, min.size='5',
+#'  dist.method="shortest.paths",
+#'  nperm=100,
+#'  vertex.attr="query",
+#'  edge.attr="Weight",
+#'  significance=0.05)
+#'  core(results.connectivity=results.connectivity)
 #' }
-#' @rdname jaccard
+#' @rdname Regulatory core identification
 #' @export 
-core <- function(modulon.subnetworks.connected.components.SANTA,significance=0.05) {
+core <- function(results.connectivity,significance=0.05) {
+  modulon.subnetworks.connected.components.SANTA = results.connectivity
   # Regulatory Cores
   # Check SANTA statistical significance
   regulatory.cores = c()
@@ -187,7 +196,7 @@ core <- function(modulon.subnetworks.connected.components.SANTA,significance=0.0
       cc.tmp = names(modulon.subnetworks.connected.components.SANTA[[modulon.tmp]])[j]
       # print(as.numeric(modulon.subnetworks.connected.components.SANTA[[modulon.tmp]][[cc.tmp]]['pval'] ))
       pval.tmp = as.numeric(modulon.subnetworks.connected.components.SANTA[[modulon.tmp]][[cc.tmp]]['pval'] )
-      print(pval.tmp)
+      print(paste('Modulon: ',modulon.tmp,'   Connected component: ',cc.tmp,'   pvalue: ',pval.tmp))
       if(pval.tmp <= significance){
         regulatory.cores=c(regulatory.cores,paste(modulon.tmp,cc.tmp,sep = ('__')))
       }
@@ -198,26 +207,41 @@ core <- function(modulon.subnetworks.connected.components.SANTA,significance=0.0
 }
 
 
-#' @title Print regulatory core
-#' @description Generate files with connected component networks and connected component elements
-#' @param net A list with all the connected components of each modulon
-#' @return A list with as many elements as modulons containing the constituent transcripton factors of all the connected components of each modulon
-#' @details The names of the outpuT list are composed by....
+#' @title Print out regulatory core analysis results
+#' @description Generate files with regulatory core networks and constituent elements.
+#' @param net Network built with build.graph()
+#' @param cc Connected components generated with find.connected.components()
+#' @param regulatory.cores Regulatory cores as the output of core()
+#' @param dir Output directory
+#' @return Files with regulatory core networks and constituent elements printed out to the output directory
+#' @details The name of each file contains the corresponding modulon and connected component
 #' @examples 
 #' \dontrun{
 #' if(interactive()){
-#'  jaccard(c('A','B','C','D','E'), c('A','B','C'))
+#'  #'  graph = build.graph(network.TILs)
+#'  igraph = build.igraph(graph)
+#'  cc=find.connected.components(net=igraph,modulons = modulons.TILs)
+#'  results.connectivity=connectivity( cc, min.size='5',
+#'  dist.method="shortest.paths",
+#'  nperm=100,
+#'  vertex.attr="query",
+#'  edge.attr="Weight",
+#'  significance=0.05)
+#'  regulatory.cores=core(results.connectivity=results.connectivity)
+#'  core.out(net=graph,cc=cc,regulatory.cores=regulatory.cores,dir="./cores)
 #'  }
 #' }
-#' @rdname jaccard
+#' @rdname Print out regulatory core analysis results
 #' @export 
-print.core = function(net,SANTA.INPUT,regulatory.cores,dir = DIR) {
+core.out = function(net,cc,regulatory.cores,dir = "./") {
+  SANTA.INPUT=cc
+  dir.create(dir)
   for(i in 1:length(regulatory.cores)){
     regulatory.core.tmp = regulatory.cores[i]
     modulon.tmp = limma::strsplit2(regulatory.core.tmp, '__')[,1]
     cc.tmp = limma::strsplit2(regulatory.core.tmp, '__')[,2]
     regulatory.core.elements.tmp=SANTA.INPUT[[modulon.tmp]][[cc.tmp]]
-    write(file=paste(DIR,"Regulatory.Core.Modulon.",modulon.tmp,'_',cc.tmp,'.nodes.txt',sep = ''),regulatory.core.elements.tmp)
+    write(file=paste(dir,"Regulatory.Core.Modulon.",modulon.tmp,'_',cc.tmp,'.nodes.txt',sep = ''),regulatory.core.elements.tmp)
     network.tmp = net[((net$Source %in% regulatory.core.elements.tmp) & (net$Target %in% regulatory.core.elements.tmp)),]
     write.table(file=paste(dir,"Regulatory.Core.Modulon.",modulon.tmp,'_',cc.tmp,'.network.txt',sep = ''),network.tmp,quote = F,row.names = F,sep = "\t")
   }
