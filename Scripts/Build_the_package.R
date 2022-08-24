@@ -57,4 +57,7 @@ browseVignettes('ModulonCore')
 
 vignette('Introduction','ModulonCore')
 
-
+# Dependencies
+usethis::use_package("limma", type = "Imports")
+usethis::use_package("igraph", type = "Imports")
+usethis::use_package("SANTA", type = "Imports")
