@@ -91,7 +91,7 @@ results.connectivity[['5']][['cc.1']]$pval
 Explore the regulatory core network (modulon 5 cc.1):
 ```{r plot network modulon 5 cc.1, results='hide'}
 # Extract the subnetwork
-net = subgraph(igraph,vids = cc[['5']][['cc.1']])
+net = igraph::subgraph(igraph,vids = cc[['5']][['cc.1']])
 net = igraph::simplify(net,remove.multiple = T)
 l <- layout_in_circle(net)
 # Calculate node outdegree to use define the node size
@@ -122,7 +122,7 @@ results.connectivity[['3']][['cc.3']]$pval
 Explore the regulatory core network (modulon 3 cc.3):
 ```{r plot network modulon 3 cc.3, results='hide'}
 # Extract the subnetwork
-net = subgraph(igraph,vids = cc[['3']][['cc.3']])
+net = igraph::subgraph(igraph,vids = cc[['3']][['cc.3']])
 net = igraph::simplify(net,remove.multiple = T)
 l <- layout_in_circle(net)
 # Calculate node outdegree to use define the node size
