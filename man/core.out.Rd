@@ -24,3 +24,20 @@ Generate files with regulatory core networks and constituent elements.
 \details{
 The name of each file contains the corresponding modulon and connected component
 }
+\examples{
+\dontrun{
+if(interactive()){
+ #'  graph = build.graph(network.TILs)
+ igraph = build.igraph(graph)
+ cc=find.connected.components(net=igraph,modulons = modulons.TILs)
+ results.connectivity=connectivity( cc, min.size='5',
+ dist.method="shortest.paths",
+ nperm=100,
+ vertex.attr="query",
+ edge.attr="Weight",
+ significance=0.05)
+ regulatory.cores=core(results.connectivity=results.connectivity)
+ core.out(net=graph,cc=cc,regulatory.cores=regulatory.cores,dir="./cores")
+ }
+}
+}

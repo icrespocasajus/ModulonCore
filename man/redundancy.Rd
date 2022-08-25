@@ -8,9 +8,9 @@ Calculate redundancy between two regulons}
 redundancy(a, b)
 }
 \arguments{
-\item{a}{A vector.}
+\item{a}{A vector}
 
-\item{b}{A vector.}
+\item{b}{A vector}
 }
 \value{
 Redundancy calculated as the ratio between the intersection and the minimum length of the two vectors.

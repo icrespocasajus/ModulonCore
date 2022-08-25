@@ -117,7 +117,7 @@ find.connected.components <- function(net, modulons,mode=MODE,dir=DIR) {
 #'  graph = build.graph(network.TILs)
 #'  igraph = build.igraph(graph)
 #'  cc=find.connected.components(net=igraph,modulons = modulons.TILs)
-#'  connectivity( cc, min.size='5',
+#'  connectivity( cc=cc, min.size='5',
 #'  dist.method="shortest.paths",
 #'  nperm=100,
 #'  vertex.attr="query",
@@ -173,7 +173,7 @@ connectivity <- function(net,cc, min.size,dist.method,nperm,vertex.attr,edge.att
 #'  graph = build.graph(network.TILs)
 #'  igraph = build.igraph(graph)
 #'  cc=find.connected.components(net=igraph,modulons = modulons.TILs)
-#'  results.connectivity=connectivity( cc, min.size='5',
+#'  results.connectivity=connectivity( cc=cc, min.size='5',
 #'  dist.method="shortest.paths",
 #'  nperm=100,
 #'  vertex.attr="query",
@@ -220,7 +220,7 @@ core <- function(results.connectivity,significance=0.05) {
 #'  #'  graph = build.graph(network.TILs)
 #'  igraph = build.igraph(graph)
 #'  cc=find.connected.components(net=igraph,modulons = modulons.TILs)
-#'  results.connectivity=connectivity( cc, min.size='5',
+#'  results.connectivity=connectivity( cc=cc, min.size='5',
 #'  dist.method="shortest.paths",
 #'  nperm=100,
 #'  vertex.attr="query",

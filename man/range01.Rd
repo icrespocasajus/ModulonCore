@@ -7,7 +7,7 @@
 range01(x)
 }
 \arguments{
-\item{x}{A numeric vector.}
+\item{x}{A numeric vector}
 }
 \value{
 Normalized values (x-min(x))/(max(x)-min(x))
