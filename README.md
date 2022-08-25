@@ -28,6 +28,8 @@ of common targets; this information can be used to point out to the most
 essential elements of the regulatory core or suggest combined
 perturbations to alter its functionality.
 
+<img src="man/figures/ModulonCore_Flowchart.png" width="100%" />
+
 ## Installation
 
 You can install the development version of ModulonCore from
@@ -64,39 +66,7 @@ results.connectivity=connectivity(
  vertex.attr="query",
  edge.attr="Weight",
  significance=0.05)
-#> computing graph distance matrix... done
-#> computing graph distance bins... done
-#> computing the clustering of the 'query' weights using 100 permutations...  done
-#> computing graph distance matrix... done
-#> computing graph distance bins... done
-#> computing the clustering of the 'query' weights using 100 permutations...  done
-#> computing graph distance matrix... done
-#> computing graph distance bins... done
-#> computing the clustering of the 'query' weights using 100 permutations...  done
-#> computing graph distance matrix... done
-#> computing graph distance bins... done
-#> computing the clustering of the 'query' weights using 100 permutations...  done
-#> computing graph distance matrix... done
-#> computing graph distance bins... done
-#> computing the clustering of the 'query' weights using 100 permutations...  done
-#> computing graph distance matrix... done
-#> computing graph distance bins... done
-#> computing the clustering of the 'query' weights using 100 permutations...  done
-#> computing graph distance matrix... done
-#> computing graph distance bins... done
-#> computing the clustering of the 'query' weights using 100 permutations...  done
-#> computing graph distance matrix... done
-#> computing graph distance bins... done
-#> computing the clustering of the 'query' weights using 100 permutations...  done
-#> computing graph distance matrix... done
-#> computing graph distance bins... done
-#> computing the clustering of the 'query' weights using 100 permutations...  done
-#> computing graph distance matrix... done
-#> computing graph distance bins... done
-#> computing the clustering of the 'query' weights using 100 permutations...  done
-#> computing graph distance matrix... done
-#> computing graph distance bins... done
-#> computing the clustering of the 'query' weights using 100 permutations...  done
+
 ```
 
 We can collect the identified regulatory cores as follows:
@@ -104,17 +74,6 @@ We can collect the identified regulatory cores as follows:
 ``` r
 # Collect the regulatory cores IDs
 regulatory.cores=core(results.connectivity=results.connectivity)
-#> [1] "Modulon:  2    Connected component:  cc.2    pvalue:  8.23547602166656e-09"
-#> [1] "Modulon:  2    Connected component:  cc.3    pvalue:  2.95335396689315e-08"
-#> [1] "Modulon:  2    Connected component:  cc.11    pvalue:  1.91201113434279e-07"
-#> [1] "Modulon:  2    Connected component:  cc.22    pvalue:  2.63423192496079e-13"
-#> [1] "Modulon:  2    Connected component:  cc.27    pvalue:  5.29418975606127e-07"
-#> [1] "Modulon:  2    Connected component:  cc.37    pvalue:  9.96985726777097e-11"
-#> [1] "Modulon:  2    Connected component:  cc.42    pvalue:  1.85924805953426e-23"
-#> [1] "Modulon:  2    Connected component:  cc.46    pvalue:  2.18297793149058e-14"
-#> [1] "Modulon:  3    Connected component:  cc.3    pvalue:  1.47166073436368e-06"
-#> [1] "Modulon:  4    Connected component:  cc.1    pvalue:  1.28168023531566e-08"
-#> [1] "Modulon:  5    Connected component:  cc.1    pvalue:  5.90680782426239e-08"
 regulatory.cores
 #>  [1] "2__cc.2"  "2__cc.3"  "2__cc.11" "2__cc.22" "2__cc.27" "2__cc.37"
 #>  [7] "2__cc.42" "2__cc.46" "3__cc.3"  "4__cc.1"  "5__cc.1"
@@ -124,7 +83,6 @@ The regulatory cores can be printed out using the core.out() function:
 
 ``` r
 core.out(net=graph,cc=cc,regulatory.cores=regulatory.cores,dir="./cores")
-#> Warning in dir.create(dir): './cores' already exists
 ```
 
 Plot the results of the connectivity analysis for the regulatory core of
@@ -163,10 +121,6 @@ l <- igraph::layout_in_circle(net)
 # Calculate node outdegree to use define the node size
 deg <- igraph::degree(net, mode="out")
 plot(net, layout=l,vertex.size=5 + deg*2,vertex.label.color="black", vertex.label.dist=c(-3,3), edge.arrow.size=.4,vertex.color = adjustcolor("SkyBlue2", alpha.f = .5))
-#> Warning in label.dist * cos(-label.degree) * (vertex.size + 6 * 8 * log10(2)):
-#> longer object length is not a multiple of shorter object length
-#> Warning in label.dist * sin(-label.degree) * (vertex.size + 6 * 8 * log10(2)):
-#> longer object length is not a multiple of shorter object length
 ```
 
 <img src="man/figures/README-plot network modulon 5 cc.1-1.png" width="100%" />
@@ -174,11 +128,6 @@ plot(net, layout=l,vertex.size=5 + deg*2,vertex.label.color="black", vertex.labe
 ``` r
 pdf(file="./net.5.cc.1.pdf",height = 6,width = 6)
 plot(net, layout=l,vertex.size=5 + deg*2,vertex.label.color="black", vertex.label.dist=c(-3,3), edge.arrow.size=.4,vertex.color = adjustcolor("SkyBlue2", alpha.f = .5))
-#> Warning in label.dist * cos(-label.degree) * (vertex.size + 6 * 8 * log10(2)):
-#> longer object length is not a multiple of shorter object length
-
-#> Warning in label.dist * cos(-label.degree) * (vertex.size + 6 * 8 * log10(2)):
-#> longer object length is not a multiple of shorter object length
 dev.off()
 ```
 
@@ -219,10 +168,6 @@ l <- igraph::layout_in_circle(net)
 # Calculate node outdegree to use define the node size
 deg <- igraph::degree(net, mode="out")
 plot(net, layout=l,vertex.size=5 + deg*2,vertex.label.color="black", vertex.label.dist=c(-3,3), edge.arrow.size=.4,vertex.color = adjustcolor("SkyBlue2", alpha.f = .5))
-#> Warning in label.dist * cos(-label.degree) * (vertex.size + 6 * 8 * log10(2)):
-#> longer object length is not a multiple of shorter object length
-#> Warning in label.dist * sin(-label.degree) * (vertex.size + 6 * 8 * log10(2)):
-#> longer object length is not a multiple of shorter object length
 ```
 
 <img src="man/figures/README-plot network modulon 3 cc.3-1.png" width="100%" />
@@ -230,13 +175,9 @@ plot(net, layout=l,vertex.size=5 + deg*2,vertex.label.color="black", vertex.labe
 ``` r
 pdf(file="./net.3.cc.3.pdf",height = 6,width = 6)
 plot(net, layout=l,vertex.size=5 + deg*2,vertex.label.color="black", vertex.label.dist=c(-3,3), edge.arrow.size=.4,vertex.color = adjustcolor("SkyBlue2", alpha.f = .5))
-#> Warning in label.dist * cos(-label.degree) * (vertex.size + 6 * 8 * log10(2)):
-#> longer object length is not a multiple of shorter object length
-
-#> Warning in label.dist * cos(-label.degree) * (vertex.size + 6 * 8 * log10(2)):
-#> longer object length is not a multiple of shorter object length
 dev.off()
 ```
+<img src="man/figures/README-plot network modulon 5 cc.1-1.png" width="100%" />
 
 Big nodes correspond with with transcription factors with high
 outdegree.
@@ -245,11 +186,11 @@ outdegree.
 
 Isaac Crespo
 
-<img src="man/figures/README-pressure-1.png" width="100%" />
+<img src="man/figures/README-isaaccrespo_WEB_big.jpg" width="30%" />
 
 Isaac Crespo, phD  
 Senior Computational Scientist  
 CHUV \| Department of Oncology \| George Coukos group  
 Ludwig Institute for Cancer Research \| Lausanne Branch  
-AGORA, Bugnon 25A, 1005 Lausanne, 4th floor, Room 38  
+AGORA, Bugnon 25A, 1005 Lausanne, 4th floor, Room 026  
 <isaaccrespo@hotmail.com>
