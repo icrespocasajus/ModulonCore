@@ -44,7 +44,7 @@ pacman::p_functions("ModulonCore")
 
 devtools::check()# WARNING! Be aware that using check from RStudio build panel is going to wipe out the doc folder; vignettes may stop working properly
 
-usethis::use_vignette(name = "Readme")
+usethis::use_vignette(name = "README")
 
 tools::buildVignettes(dir = ".", tangle=TRUE)
 dir.create("inst")
@@ -54,7 +54,6 @@ file.copy(dir("vignettes", full.names=TRUE), "inst/doc", overwrite=TRUE)
 # Commit and re-build
 
 browseVignettes('ModulonCore')
-
 vignette('Introduction','ModulonCore')
 
 # Dependencies NOT WORKING!
