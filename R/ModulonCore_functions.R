@@ -57,7 +57,7 @@ build.igraph = function(net){
   # Network in igraph format
   network.igraph = igraph::graph_from_edgelist(as.matrix(network[c(1:2)]))
   igraph::E(network.igraph)$Weight = network$Weight
-  igraph = simplify(igraph,remove.multiple = T)
+  igraph = igraph::simplify(igraph,remove.multiple = T)
   return(network.igraph)
 }
 
