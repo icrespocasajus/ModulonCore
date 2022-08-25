@@ -141,7 +141,7 @@ connectivity <- function(net,cc, min.size,dist.method,nperm,vertex.attr,edge.att
       igraph::V(net)$query = 0
       
       for (j in 1: length(query)){
-        for (i in 1: length(V(net))){
+        for (i in 1: length(igraph::V(net))){
           if (identical(as.character(query[j]),vertex_names[i])){
             igraph::V(net)$query[i] = 1;
             print (paste(as.character(query[j]),",equals to ",vertex_names[i]))
