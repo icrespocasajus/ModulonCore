@@ -9,7 +9,7 @@
 The goal of ModulonCore is to identify the modulon regulatory cores or
 connected components with statistically supported over-connectivity
 
-<img src="man/figures/ModulonCore_Flowchart.png" width="50%" />
+<img src="man/figures/ModulonCore_Flowchart.png" width="100%" />
 
 ## Installation
 
