@@ -73,6 +73,9 @@ plot(results.connectivity[['5']][['cc.1']])
 ```
 
 <img src="man/figures/README-plot connectivity modulon 5 cc.1-1.png" width="100%" />
+
+The connectivity of the connected component cc.1 from modulon 5 is evaluated using the area under the Knet-function (AUK) by comparison of the connectivity of the regulatory core against random subnetworks of the same size derived from the global transcriptional network inferred with SCENIC. An empirical p-value is calculated using a Z-test 
+
 Show the pvalue (empirical p-value calculated using a Z-test) of the connectivity analysis
 for the regulatory core of modulon 5
 
@@ -91,6 +94,8 @@ plot(results.connectivity[['3']][['cc.3']])
 
 <img src="man/figures/README-plot connectivity modulon 3 cc.3-1.png" width="100%" />
 
+The connectivity of the connected component cc.3 from modulon 3 is evaluated using the area under the Knet-function (AUK) by comparison of the connectivity of the regulatory core against random subnetworks of the same size derived from the global transcriptional network inferred with SCENIC. An empirical p-value is calculated using a Z-test
+
 Show the pvalue (empirical p-value calculated using a Z-test) of the connectivity analysis
  for the regulatory core of modulon 3
 
@@ -104,10 +109,9 @@ results.connectivity[['3']][['cc.3']]$pval
 
 <img src="man/figures/README-isaaccrespo_WEB_big.jpg" width="30%" />
 
-Isaac Crespo, phD
+Isaac Crespo, phD  
 Senior Computational Scientist, CHUV \| Department of
-Oncology \| George Coukos group
-Ludwig Institute for Cancer Research \|
-Lausanne Branch
-AGORA, Bugnon 25A, 1005 Lausanne, 4th floor, Room 026
+Oncology \| George Coukos group  
+Ludwig Institute for Cancer Research \| Lausanne Branch  
+AGORA, Bugnon 25A, 1005 Lausanne, 4th floor, Room 026  
 <isaaccrespo@hotmail.com>

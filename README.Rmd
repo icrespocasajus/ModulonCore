@@ -78,6 +78,9 @@ Plot the results of the connectivity analysis for the regulatory core of modulon
 # Connectivity analysis plot
 plot(results.connectivity[['5']][['cc.1']])
 ```
+The connectivity of the connected component cc.1 from modulon 5 is evaluated using the area under the Knet-function (AUK) by comparison of the connectivity of the regulatory core against random subnetworks of the same size derived from the global transcriptional network inferred with SCENIC. An empirical p-value is calculated using a Z-test 
+
+
 Show the pvalue (empirical p-value calculated using a Z-test) of the connectivity analysis for the regulatory core of modulon 5
 ```{r pvalue connectivity modulon 5 cc.1}
 # pvalue
@@ -88,6 +91,7 @@ Plot the results of the connectivity analysis for the regulatory core of modulon
 # Explore results for modulon 3
 plot(results.connectivity[['3']][['cc.3']])
 ```
+The connectivity of the connected component cc.3 from modulon 3 is evaluated using the area under the Knet-function (AUK) by comparison of the connectivity of the regulatory core against random subnetworks of the same size derived from the global transcriptional network inferred with SCENIC. An empirical p-value is calculated using a Z-test
 
 Show the pvalue (empirical p-value calculated using a Z-test) of the connectivity analysis for the regulatory core of modulon 3
 ```{r pvalue connectivity modulon 3 cc.3}
@@ -101,6 +105,7 @@ Isaac Crespo
 
 ```{r pressure, echo = FALSE}
 plot(pressure)
+#<img src="man/figures/README-isaaccrespo_WEB_big.jpg" width="30%" />
 ```
 
 Isaac Crespo, phD
