@@ -9,6 +9,8 @@
 The goal of ModulonCore is to identify the modulon regulatory cores or
 connected components with statistically supported over-connectivity
 
+<img src="man/figures/ModulonCore_Flowchart.png" width="50%" />
+
 ## Installation
 
 You can install the development version of ModulonCore from
@@ -110,8 +112,8 @@ results.connectivity[['3']][['cc.3']]$pval
 <img src="man/figures/README-isaaccrespo_WEB_big.jpg" width="30%" />
 
 Isaac Crespo, phD  
-Senior Computational Scientist, CHUV \| Department of
-Oncology \| George Coukos group  
+Senior Computational Scientist  
+CHUV \| Department of Oncology \| George Coukos group  
 Ludwig Institute for Cancer Research \| Lausanne Branch  
 AGORA, Bugnon 25A, 1005 Lausanne, 4th floor, Room 026  
 <isaaccrespo@hotmail.com>
