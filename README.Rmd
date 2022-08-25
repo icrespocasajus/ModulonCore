@@ -93,9 +93,9 @@ Explore the regulatory core network (modulon 5 cc.1):
 # Extract the subnetwork
 net = igraph::subgraph(igraph,vids = cc[['5']][['cc.1']])
 net = igraph::simplify(net,remove.multiple = T)
-l <- layout_in_circle(net)
+l <- igraph::layout_in_circle(net)
 # Calculate node outdegree to use define the node size
-deg <- degree(net, mode="out")
+deg <- igraph::degree(net, mode="out")
 plot(net, layout=l,vertex.size=5 + deg*2,vertex.label.color="black", vertex.label.dist=c(-3,3), edge.arrow.size=.4,vertex.color = adjustcolor("SkyBlue2", alpha.f = .5))
 
 pdf(file="./net.5.cc.1.pdf",height = 6,width = 6)
@@ -124,9 +124,9 @@ Explore the regulatory core network (modulon 3 cc.3):
 # Extract the subnetwork
 net = igraph::subgraph(igraph,vids = cc[['3']][['cc.3']])
 net = igraph::simplify(net,remove.multiple = T)
-l <- layout_in_circle(net)
+l <- igraph::layout_in_circle(net)
 # Calculate node outdegree to use define the node size
-deg <- degree(net, mode="out")
+deg <- igraph::degree(net, mode="out")
 plot(net, layout=l,vertex.size=5 + deg*2,vertex.label.color="black", vertex.label.dist=c(-3,3), edge.arrow.size=.4,vertex.color = adjustcolor("SkyBlue2", alpha.f = .5))
 
 pdf(file="./net.3.cc.3.pdf",height = 6,width = 6)
