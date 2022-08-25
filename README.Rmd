@@ -33,7 +33,7 @@ devtools::install_github("icrespocasajus/ModulonCore")
 
 This is a basic example which shows you how to find and explore the regulatory cores of a given set of modulons
 
-```{r example}
+```{r example, echo=T, results='hide'}
 library(ModulonCore)
 library(igraph)
 library(SANTA)

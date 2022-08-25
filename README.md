@@ -6,7 +6,8 @@
 <!-- badges: start -->
 <!-- badges: end -->
 
-The goal of ModulonCore is to identify the modulon regulatory cores
+The goal of ModulonCore is to identify the modulon regulatory cores or
+connected components with statistically supported over-connectivity
 
 ## Installation
 
@@ -20,36 +21,150 @@ devtools::install_github("icrespocasajus/ModulonCore")
 
 ## Example
 
-This is a basic example which shows you how to solve a common problem:
+This is a basic example which shows you how to find and explore the
+regulatory cores of a given set of modulons
 
 ``` r
 library(ModulonCore)
-## basic example code
+library(igraph)
+#> 
+#> Attaching package: 'igraph'
+#> The following objects are masked from 'package:stats':
+#> 
+#>     decompose, spectrum
+#> The following object is masked from 'package:base':
+#> 
+#>     union
+library(SANTA)
+# For this example we will use the TILs dataset included in ModulonCore
+
+# Build the graph
+graph = build.graph(network.TILs)
+# Transform the graph into an igraph object
+igraph = build.igraph(graph)
+# Look for connected components
+cc=find.connected.components(net=igraph,modulons = modulons.TILs)
+# Check the statistical over-connectivity of the connected components
+set.seed(123)
+results.connectivity=connectivity( 
+ net=igraph,
+ cc=cc,
+ min.size='5',
+ dist.method="shortest.paths",
+ nperm=100,
+ vertex.attr="query",
+ edge.attr="Weight",
+ significance=0.05)
+#> computing graph distance matrix...
+#> done
+#> computing graph distance bins... done
+#> computing the clustering of the 'query' weights using 100 permutations...  done
+#> computing graph distance matrix... done
+#> computing graph distance bins... done
+#> computing the clustering of the 'query' weights using 100 permutations...  done
+#> computing graph distance matrix... done
+#> computing graph distance bins... done
+#> computing the clustering of the 'query' weights using 100 permutations...  done
+#> computing graph distance matrix... done
+#> computing graph distance bins... done
+#> computing the clustering of the 'query' weights using 100 permutations...  done
+#> computing graph distance matrix... done
+#> computing graph distance bins... done
+#> computing the clustering of the 'query' weights using 100 permutations...  done
+#> computing graph distance matrix... done
+#> computing graph distance bins... done
+#> computing the clustering of the 'query' weights using 100 permutations...  done
+#> computing graph distance matrix... done
+#> computing graph distance bins... done
+#> computing the clustering of the 'query' weights using 100 permutations...  done
+#> computing graph distance matrix... done
+#> computing graph distance bins... done
+#> computing the clustering of the 'query' weights using 100 permutations...  done
+#> computing graph distance matrix... done
+#> computing graph distance bins... done
+#> computing the clustering of the 'query' weights using 100 permutations...  done
+#> computing graph distance matrix... done
+#> computing graph distance bins... done
+#> computing the clustering of the 'query' weights using 100 permutations...  done
+#> computing graph distance matrix... done
+#> computing graph distance bins... done
+#> computing the clustering of the 'query' weights using 100 permutations...  done
 ```
 
-What is special about using `README.Rmd` instead of just `README.md`?
-You can include R chunks like so:
+We can collect the identified regulatory cores as follows:
 
 ``` r
-summary(cars)
-#>      speed           dist       
-#>  Min.   : 4.0   Min.   :  2.00  
-#>  1st Qu.:12.0   1st Qu.: 26.00  
-#>  Median :15.0   Median : 36.00  
-#>  Mean   :15.4   Mean   : 42.98  
-#>  3rd Qu.:19.0   3rd Qu.: 56.00  
-#>  Max.   :25.0   Max.   :120.00
+# Collect the regulatory cores IDs
+regulatory.cores=core(results.connectivity=results.connectivity)
+#> [1] "Modulon:  2    Connected component:  cc.2    pvalue:  8.23547602166656e-09"
+#> [1] "Modulon:  2    Connected component:  cc.3    pvalue:  2.95335396689315e-08"
+#> [1] "Modulon:  2    Connected component:  cc.11    pvalue:  1.91201113434279e-07"
+#> [1] "Modulon:  2    Connected component:  cc.22    pvalue:  2.63423192496079e-13"
+#> [1] "Modulon:  2    Connected component:  cc.27    pvalue:  5.29418975606127e-07"
+#> [1] "Modulon:  2    Connected component:  cc.37    pvalue:  9.96985726777097e-11"
+#> [1] "Modulon:  2    Connected component:  cc.42    pvalue:  1.85924805953426e-23"
+#> [1] "Modulon:  2    Connected component:  cc.46    pvalue:  2.18297793149058e-14"
+#> [1] "Modulon:  3    Connected component:  cc.3    pvalue:  1.47166073436368e-06"
+#> [1] "Modulon:  4    Connected component:  cc.1    pvalue:  1.28168023531566e-08"
+#> [1] "Modulon:  5    Connected component:  cc.1    pvalue:  5.90680782426239e-08"
+regulatory.cores
+#>  [1] "2__cc.2"  "2__cc.3"  "2__cc.11" "2__cc.22" "2__cc.27" "2__cc.37"
+#>  [7] "2__cc.42" "2__cc.46" "3__cc.3"  "4__cc.1"  "5__cc.1"
 ```
 
-You’ll still need to render `README.Rmd` regularly, to keep `README.md`
-up-to-date. `devtools::build_readme()` is handy for this. You could also
-use GitHub Actions to re-render `README.Rmd` every time you push. An
-example workflow can be found here:
-<https://github.com/r-lib/actions/tree/v1/examples>.
+The regulatory cores can be printed out using the core.out() function:
 
-You can also embed plots, for example:
+``` r
+core.out(net=graph,cc=cc,regulatory.cores=regulatory.cores,dir="./cores")
+#> Warning in dir.create(dir): './cores' already exists
+```
 
-<img src="man/figures/isaaccrespo_WEB.jpg" width="25%" />
+Plot the results of the connectivity analysis for the regulatory core of
+modulon 5
 
-In that case, don’t forget to commit and push the resulting figure
-files, so they display on GitHub and CRAN.
+``` r
+# Explore results for modulon 5
+
+# Connectivity analysis plot
+plot(results.connectivity[['5']][['cc.1']])
+```
+
+<img src="man/figures/README-plot connectivity modulon 5 cc.1-1.png" width="50%" />
+Show the pvalue (empiric z-score) of the connectivity analysis for the
+regulatory core of modulon 5
+
+``` r
+# pvalue
+results.connectivity[['5']][['cc.1']]$pval
+#> [1] 5.906808e-08
+```
+
+Plot the results of the connectivity analysis for the regulatory core of
+modulon 3
+
+``` r
+# Explore results for modulon 3
+plot(results.connectivity[['3']][['cc.3']])
+```
+
+<img src="man/figures/README-plot connectivity modulon 3 cc.3-1.png" width="50%" />
+
+Show the pvalue (empiric z-score) of the connectivity analysis for the
+regulatory core of modulon 3
+
+``` r
+# pvalue
+results.connectivity[['3']][['cc.3']]$pval
+#> [1] 1.471661e-06
+```
+
+## Author
+
+Isaac Crespo
+
+<img src="man/figures/README-pressure-1.png" width="50%" />
+
+Isaac Crespo, phD Senior Computational Scientist, CHUV \| Department of
+Oncology \| George Coukos group Ludwig Institute for Cancer Research \|
+Lausanne Branch AGORA, Bugnon 25A, 1005 Lausanne, 4th floor, Room 38
+<isaaccrespo@hotmail.com>
