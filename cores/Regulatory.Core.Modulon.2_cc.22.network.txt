@@ -1,0 +1,11 @@
+Source	Target	Weight
+Atf7	Klf16	1
+Zfp568	Pbx2	1
+Zscan12	Atf7	1
+Fiz1	Zfp523	1
+Taf7	Fiz1	1
+Klf16	Tead3	1
+Pbx2	Zfp523	1
+Zfp523	Zscan12	1
+Zfp523	Zfhx2	1
+Zfhx2	Zbtb34	1

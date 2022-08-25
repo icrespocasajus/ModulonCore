@@ -1,0 +1,6 @@
+Source	Target	Weight
+Zfp82	Zfp275	1
+Pax2	Zfp275	1
+Gata1	Hey2	1
+Hey2	Sp9	1
+Hey2	Zfp82	1

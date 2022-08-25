@@ -1,0 +1,5 @@
+Source	Target	Weight
+Stat2	Mtf1	1
+Stat2	Pml	1
+Pitx2	Mtf1	1
+Rfx5	Pml	1

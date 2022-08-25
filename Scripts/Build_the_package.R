@@ -65,3 +65,7 @@ usethis::use_package("SANTA", type = "Imports")
 
 # Check the package
 devtools::check()
+
+
+#Update Readme.Rmd
+devtools::build_readme()

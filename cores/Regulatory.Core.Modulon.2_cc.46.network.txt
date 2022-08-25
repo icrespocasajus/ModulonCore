@@ -1,0 +1,5 @@
+Source	Target	Weight
+Zbtb14	Rfx3	1
+Rfx3	Dbp	1
+Myod1	Rfx3	1
+Hsf1	Rfx3	1

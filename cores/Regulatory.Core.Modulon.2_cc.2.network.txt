@@ -1,0 +1,5 @@
+Source	Target	Weight
+Myc	Zfp286	1
+Erg	Hoxc8	1
+Scrt1	Zfp286	1
+Hoxc8	Myc	1
