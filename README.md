@@ -125,12 +125,6 @@ plot(net, layout=l,vertex.size=5 + deg*2,vertex.label.color="black", vertex.labe
 
 <img src="man/figures/README-plot network modulon 5 cc.1-1.png" width="100%" />
 
-``` r
-pdf(file="./net.5.cc.1.pdf",height = 6,width = 6)
-plot(net, layout=l,vertex.size=5 + deg*2,vertex.label.color="black", vertex.label.dist=c(-3,3), edge.arrow.size=.4,vertex.color = adjustcolor("SkyBlue2", alpha.f = .5))
-dev.off()
-```
-
 Big nodes correspond with with transcription factors with high
 outdegree.
 
@@ -171,13 +165,6 @@ plot(net, layout=l,vertex.size=5 + deg*2,vertex.label.color="black", vertex.labe
 ```
 
 <img src="man/figures/README-plot network modulon 3 cc.3-1.png" width="100%" />
-
-``` r
-pdf(file="./net.3.cc.3.pdf",height = 6,width = 6)
-plot(net, layout=l,vertex.size=5 + deg*2,vertex.label.color="black", vertex.label.dist=c(-3,3), edge.arrow.size=.4,vertex.color = adjustcolor("SkyBlue2", alpha.f = .5))
-dev.off()
-```
-<img src="man/figures/README-plot network modulon 5 cc.1-1.png" width="100%" />
 
 Big nodes correspond with with transcription factors with high
 outdegree.
