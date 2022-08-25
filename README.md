@@ -129,7 +129,7 @@ modulon 5
 plot(results.connectivity[['5']][['cc.1']])
 ```
 
-<img src="man/figures/README-plot connectivity modulon 5 cc.1-1.png" width="50%" />
+<img src="man/figures/README-plot connectivity modulon 5 cc.1-1.png" width="100%" />
 Show the pvalue (empiric z-score) of the connectivity analysis for the
 regulatory core of modulon 5
 
@@ -147,7 +147,7 @@ modulon 3
 plot(results.connectivity[['3']][['cc.3']])
 ```
 
-<img src="man/figures/README-plot connectivity modulon 3 cc.3-1.png" width="50%" />
+<img src="man/figures/README-plot connectivity modulon 3 cc.3-1.png" width="100%" />
 
 Show the pvalue (empiric z-score) of the connectivity analysis for the
 regulatory core of modulon 3
@@ -162,7 +162,7 @@ results.connectivity[['3']][['cc.3']]$pval
 
 Isaac Crespo
 
-<img src="man/figures/README-pressure-1.png" width="50%" />
+<img src="man/figures/README-pressure-1.png" width="100%" />
 
 Isaac Crespo, phD Senior Computational Scientist, CHUV \| Department of
 Oncology \| George Coukos group Ludwig Institute for Cancer Research \|
