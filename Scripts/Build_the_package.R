@@ -44,7 +44,7 @@ pacman::p_functions("ModulonCore")
 
 devtools::check()# WARNING! Be aware that using check from RStudio build panel is going to wipe out the doc folder; vignettes may stop working properly
 
-usethis::use_vignette(name = "Introduction")
+usethis::use_vignette(name = "Readme")
 
 tools::buildVignettes(dir = ".", tangle=TRUE)
 dir.create("inst")
@@ -58,7 +58,6 @@ browseVignettes('ModulonCore')
 vignette('Introduction','ModulonCore')
 
 # Dependencies NOT WORKING!
-usethis::use_package("limma", type = "Imports")
 usethis::use_package("igraph", type = "Imports")
 usethis::use_package("SANTA", type = "Imports")
 

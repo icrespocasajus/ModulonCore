@@ -1,6 +1,0 @@
-Source	Target	Weight
-Glis1	Snai1	1
-Mitf	Snai1	1
-Snai1	Myef2	1
-Snai1	Glis1	1
-Tff3	Snai1	1

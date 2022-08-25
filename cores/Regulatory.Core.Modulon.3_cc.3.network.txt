@@ -1,8 +1,0 @@
-Source	Target	Weight
-Crem	Maf	1
-Crem	Gtf2f1	1
-Tbx21	Crem	1
-Tbx21	Crem	1
-Tbx21	Runx3	1
-Runx3	Fli1	1
-Gtf2f1	Gabpb1	1
