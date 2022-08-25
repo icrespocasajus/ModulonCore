@@ -80,7 +80,7 @@ Plot the results of the connectivity analysis for the regulatory core of modulon
 # Connectivity analysis plot
 plot(results.connectivity[['5']][['cc.1']])
 ```
-Show the pvalue (empiric z-score) of the connectivity analysis for the regulatory core of modulon 5
+Show the pvalue (empirical p-value calculated using a Z-test) of the connectivity analysis for the regulatory core of modulon 5
 ```{r pvalue connectivity modulon 5 cc.1}
 # pvalue
 results.connectivity[['5']][['cc.1']]$pval
@@ -91,7 +91,7 @@ Plot the results of the connectivity analysis for the regulatory core of modulon
 plot(results.connectivity[['3']][['cc.3']])
 ```
 
-Show the pvalue (empiric z-score) of the connectivity analysis for the regulatory core of modulon 3
+Show the pvalue (empirical p-value calculated using a Z-test) of the connectivity analysis for the regulatory core of modulon 3
 ```{r pvalue connectivity modulon 3 cc.3}
 # pvalue
 results.connectivity[['3']][['cc.3']]$pval
