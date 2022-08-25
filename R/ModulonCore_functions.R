@@ -237,8 +237,8 @@ core.out = function(net,cc,regulatory.cores,dir = "./") {
   dir.create(dir)
   for(i in 1:length(regulatory.cores)){
     regulatory.core.tmp = regulatory.cores[i]
-    modulon.tmp = limma::strsplit2(regulatory.core.tmp, '__')[,1]
-    cc.tmp = limma::strsplit2(regulatory.core.tmp, '__')[,2]
+    modulon.tmp = strsplit2(regulatory.core.tmp, '__')[,1]
+    cc.tmp = strsplit2(regulatory.core.tmp, '__')[,2]
     regulatory.core.elements.tmp=SANTA.INPUT[[modulon.tmp]][[cc.tmp]]
     write(file=paste(dir,"/Regulatory.Core.Modulon.",modulon.tmp,'_',cc.tmp,'.nodes.txt',sep = ''),regulatory.core.elements.tmp)
     network.tmp = net[((net$Source %in% regulatory.core.elements.tmp) & (net$Target %in% regulatory.core.elements.tmp)),]
