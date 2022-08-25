@@ -57,7 +57,11 @@ browseVignettes('ModulonCore')
 
 vignette('Introduction','ModulonCore')
 
-# Dependencies
+# Dependencies NOT WORKING!
 usethis::use_package("limma", type = "Imports")
 usethis::use_package("igraph", type = "Imports")
 usethis::use_package("SANTA", type = "Imports")
+
+
+# Check the package
+devtools::check()
