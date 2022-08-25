@@ -26,16 +26,7 @@ regulatory cores of a given set of modulons
 
 ``` r
 library(ModulonCore)
-library(igraph)
-#> 
-#> Attaching package: 'igraph'
-#> The following objects are masked from 'package:stats':
-#> 
-#>     decompose, spectrum
-#> The following object is masked from 'package:base':
-#> 
-#>     union
-library(SANTA)
+
 # For this example we will use the TILs dataset included in ModulonCore
 
 # Build the graph
@@ -111,9 +102,12 @@ results.connectivity[['3']][['cc.3']]$pval
 
 ## Author
 
-<img src="man/figures/README-isaaccrespo_WEB.jpg" width="50%" />
+<img src="man/figures/README-isaaccrespo_WEB_big.jpg" width="30%" />
 
-Isaac Crespo, phD Senior Computational Scientist, CHUV \| Department of
-Oncology \| George Coukos group Ludwig Institute for Cancer Research \|
-Lausanne Branch AGORA, Bugnon 25A, 1005 Lausanne, 4th floor, Room 38
+Isaac Crespo, phD
+Senior Computational Scientist, CHUV \| Department of
+Oncology \| George Coukos group
+Ludwig Institute for Cancer Research \|
+Lausanne Branch
+AGORA, Bugnon 25A, 1005 Lausanne, 4th floor, Room 026
 <isaaccrespo@hotmail.com>

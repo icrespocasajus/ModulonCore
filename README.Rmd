@@ -35,8 +35,6 @@ This is a basic example which shows you how to find and explore the regulatory c
 
 ```{r example, echo=T, results='hide'}
 library(ModulonCore)
-library(igraph)
-library(SANTA)
 # For this example we will use the TILs dataset included in ModulonCore
 
 # Build the graph
