@@ -137,7 +137,7 @@ connectivity <- function(net,cc, min.size,dist.method,nperm,vertex.attr,edge.att
   modulon.subnetworks.connected.components.SANTA = lapply(SANTA.INPUT,function(x){
     tmp = lapply(x,function(y){
       query = y
-      igraph::V(net)$query = 0;
+      igraph::V(net)$query = 0
       
       for (j in 1: length(query)){
         for (i in 1: length(V(net))){

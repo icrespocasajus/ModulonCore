@@ -33,7 +33,7 @@ if(interactive()){
  graph = build.graph(network.TILs)
  igraph = build.igraph(graph)
  cc=find.connected.components(net=igraph,modulons = modulons.TILs)
- connectivity( cc, min.size='5',
+ connectivity( cc=cc, min.size='5',
  dist.method="shortest.paths",
  nperm=100,
  vertex.attr="query",
