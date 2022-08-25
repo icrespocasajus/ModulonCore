@@ -18,7 +18,8 @@ knitr::opts_chunk$set(
 <!-- badges: start -->
 <!-- badges: end -->
 
-The goal of ModulonCore is to identify the modulon regulatory cores or connected components with statistically supported over-connectivity
+The goal of ModulonCore is to identify and characterize the modulon regulatory cores or connected components with statistically supported over-connectivity.
+The pipeline to achieve this goal can be described in 4 steps: 1) modulon network assembly. The partial networks of the regulon constituent elements are put together to assemble the modulon network, where TFs are connected by transcriptional regulatory events inferred from the data using the SCENIC regulon inference pipeline; 2) Connected components identification. The modulon subnetwork (including only TF-TF interactions) is further explored to find all the connected components; 3) Connectivity analysis. Every connected component is evaluated in order to assess if their overconnectivity is statically supported using the SANTA algorithm. SANTA tests if the connectivity within the connected component has a higher density than expected by chance in random subnetworks of the same size subset from the global TF-TF network derived from the assembly of all regulon partial networks; and 4) Redundancy analysis. This analysis allows the identification of the regulatory core constituent elements with high- (conversely low-) number of common targets; this information can be used to point out to the most essential elements of the regulatory core or suggest combined perturbations to alter its functionality.
 
 ## Installation
 
@@ -108,10 +109,10 @@ plot(pressure)
 #<img src="man/figures/README-isaaccrespo_WEB_big.jpg" width="30%" />
 ```
 
-Isaac Crespo, phD
-Senior Computational Scientist,
-CHUV | Department of Oncology | George Coukos group
-Ludwig Institute for Cancer Research |  Lausanne Branch
-AGORA, Bugnon 25A, 1005 Lausanne, 4th floor, Room 38
+Isaac Crespo, phD  
+Senior Computational Scientist  
+CHUV | Department of Oncology | George Coukos group  
+Ludwig Institute for Cancer Research |  Lausanne Branch  
+AGORA, Bugnon 25A, 1005 Lausanne, 4th floor, Room 38  
 isaaccrespo@hotmail.com
 

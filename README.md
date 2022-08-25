@@ -6,8 +6,8 @@
 <!-- badges: start -->
 <!-- badges: end -->
 
-The goal of ModulonCore is to identify the modulon regulatory cores or
-connected components with statistically supported over-connectivity
+The goal of ModulonCore is to identify and characterize the modulon regulatory cores or connected components with statistically supported over-connectivity.
+The pipeline to achieve this goal can be described in 4 steps: 1) modulon network assembly. The partial networks of the regulon constituent elements are put together to assemble the modulon network, where TFs are connected by transcriptional regulatory events inferred from the data using the SCENIC regulon inference pipeline; 2) Connected components identification. The modulon subnetwork (including only TF-TF interactions) is further explored to find all the connected components; 3) Connectivity analysis. Every connected component is evaluated in order to assess if their overconnectivity is statically supported using the SANTA algorithm. SANTA tests if the connectivity within the connected component has a higher density than expected by chance in random subnetworks of the same size subset from the global TF-TF network derived from the assembly of all regulon partial networks; and 4) Redundancy analysis. This analysis allows the identification of the regulatory core constituent elements with high- (conversely low-) number of common targets; this information can be used to point out to the most essential elements of the regulatory core or suggest combined perturbations to alter its functionality.
 
 <img src="man/figures/ModulonCore_Flowchart.png" width="100%" />
 
