@@ -54,7 +54,7 @@ file.copy(dir("vignettes", full.names=TRUE), "inst/doc", overwrite=TRUE)
 # Commit and re-build
 
 browseVignettes('ModulonCore')
-vignette('Introduction','ModulonCore')
+vignette('Readme','ModulonCore')
 
 # Dependencies NOT WORKING!
 usethis::use_package("igraph", type = "Imports")
