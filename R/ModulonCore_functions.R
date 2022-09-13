@@ -25,6 +25,8 @@ WEIGHT=c('1')
 #' @export 
 build.graph = function(net,weight=WEIGHT){
   network.SCENIC = net
+  #Remove duplicated edges
+  network.SCENIC = unique(network.SCENIC)
   #Remove self-loops
   network.SCENIC = network.SCENIC[!(network.SCENIC$Source == network.SCENIC$Target),]
   all.TF = unique(network.SCENIC$Source)
