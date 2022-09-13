@@ -1,5 +1,6 @@
 library(usethis)
 network.TILs = readRDS(file="./network.TILs.Rds")
+network.TILs = unique(network.TILs)
 modulons.TILs=readRDS(file="./TF.AUC.clusters.TILs.Rds")
 usethis::use_data(network.TILs, overwrite = TRUE)
 usethis::use_data(modulons.TILs, overwrite = TRUE)
