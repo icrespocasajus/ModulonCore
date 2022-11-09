@@ -4,7 +4,7 @@
 \alias{find.connected.components}
 \title{Connected Components Identification}
 \usage{
-find.connected.components(net, modulons, mode = MODE, dir = DIR)
+find.connected.components(net, modulons, mode = "weak", dir = DIR)
 }
 \arguments{
 \item{net}{A network as an igraph object}
@@ -18,7 +18,7 @@ A list with as many elements as modulons/clusters containing  all the connected 
 Find all connected components within modulons or any cluster of genes
 }
 \details{
-The names of connected components are encoded as ccX, being 'X' the ID number of the connected component
+The names of connected components are encoded as cc.X, being 'X' the ID number of the connected component
 }
 \examples{
 \dontrun{

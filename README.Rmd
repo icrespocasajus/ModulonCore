@@ -15,11 +15,20 @@ knitr::opts_chunk$set(
 
 # ModulonCore
 
-<!-- badges: start -->
-<!-- badges: end -->
+## Title
+
+ModulonCore
+
+## Introduction
+
 
 The goal of ModulonCore is to identify and characterize the modulon regulatory cores or connected components with statistically supported over-connectivity.  
-The pipeline to achieve this goal can be described in 4 steps: 1) modulon network assembly. The partial networks of the regulon constituent elements are put together to assemble the modulon network, where TFs are connected by transcriptional regulatory events inferred from the data using the SCENIC regulon inference pipeline; 2) Connected components identification. The modulon subnetwork (including only TF-TF interactions) is further explored to find all the connected components; 3) Connectivity analysis. Every connected component is evaluated in order to assess if their overconnectivity is statically supported using the SANTA algorithm. SANTA tests if the connectivity within the connected component has a higher density than expected by chance in random subnetworks of the same size subset from the global TF-TF network derived from the assembly of all regulon partial networks; and 4) Redundancy analysis. This analysis allows the identification of the regulatory core constituent elements with high- (conversely low-) number of common targets; this information can be used to point out to the most essential elements of the regulatory core or suggest combined perturbations to alter its functionality.
+The pipeline to achieve this goal can be described in 3 steps: 1) modulon network assembly. The partial networks of the regulon constituent elements are put together to assemble the modulon network, where TFs are connected by transcriptional regulatory events inferred from the data using the SCENIC regulon inference pipeline; 2) Connected components identification. The modulon subnetwork (including only TF-TF interactions) is further explored to find all the connected components; 3) Connectivity analysis. Every connected component is evaluated in order to assess if their overconnectivity is statically supported using the SANTA algorithm. The SANTA algorithm tests if the connectivity within the connected component has a higher density than expected by chance in random subnetworks of the same size subset from the global TF-TF network derived from the assembly of all regulon partial networks.
+
+```{r out.width="100%",out.height="100%", fig.align = "center",dpi=1200, echo=F}
+knitr::include_graphics("./man/figures/ModulonCore_flowchart.jpg")
+```
+
 
 ## Installation
 
@@ -34,19 +43,34 @@ devtools::install_github("icrespocasajus/ModulonCore")
 
 This is a basic example which shows you how to find and explore the regulatory cores of a given set of modulons
 
-```{r example, echo=T, results='hide'}
+Loading the required packages:
+```{r packages, echo=T, results='hide',warning=FALSE,message=FALSE}
 library(ModulonCore)
-# For this example we will use the TILs dataset included in ModulonCore
+library(igraph)
+```
 
+ STEP 1: Modulon network assembly
+```{r step1, echo=T, results='hide',warning=FALSE,message=FALSE}
+# For this example we will use the TILs dataset included in ModulonCore
 # Build the graph
 graph = build.graph(network.TILs)
 # Transform the graph into an igraph object
 igraph = build.igraph(graph)
+```
+
+ STEP 2: Connected components identification
+```{r step2, echo=T,warning=FALSE,message=FALSE}
 # Look for connected components
 cc=find.connected.components(net=igraph,modulons = modulons.TILs)
+cc.table = tab.cc(cc)
+head(cc.table)
+```
+
+STEP 3: Connectivity analysis
+```{r step3, echo=T, results='hide',warning=FALSE,message=FALSE}
 # Check the statistical over-connectivity of the connected components
 set.seed(123)
-results.connectivity=connectivity( 
+results.connectivity = connectivity( 
  net=igraph,
  cc=cc,
  min.size='5',
@@ -57,23 +81,32 @@ results.connectivity=connectivity(
  significance=0.05)
 ```
 
-We can collect the identified regulatory cores as follows:
+The identified regulatory cores can be retrieved as follows:
 
-```{r regulatory core IDs}
+```{r regulatory core IDs, echo=T,warning=FALSE,message=FALSE}
 # Collect the regulatory cores IDs
-regulatory.cores=core(results.connectivity=results.connectivity)
+regulatory.cores = core(results.connectivity=results.connectivity)
 regulatory.cores
 ```
 
-The regulatory cores can be printed out using the core.out() function: 
+This information can be added to the connected components table as follows:
 
-```{r regulatory core out}
-core.out(net=graph,cc=cc,regulatory.cores=regulatory.cores,dir="./cores")
+```{r add core info, echo=T,warning=FALSE,message=FALSE}
+# Collect the regulatory cores IDs
+cc.table$Core = ifelse(rownames(cc.table) %in% regulatory.cores,T,F)
+head(cc.table)
+```
+
+The regulatory core subnetworks can be printed out using the core.out() function: 
+
+```{r regulatory core out,warning=FALSE,message=FALSE}
+regulatory.core.networks=core.out(net=graph,cc=cc,regulatory.cores=regulatory.cores,dir="./cores")
+head(regulatory.core.networks[['5__cc.1']])
 ```
 
 Plot the results of the connectivity analysis for the regulatory core of modulon 5
 
-```{r plot connectivity modulon 5 cc.1}
+```{r plot connectivity modulon 5 cc.1, fig.height = 5, fig.width = 8, fig.align = "center",dpi=1200}
 # Explore results for modulon 5
 
 # Connectivity analysis plot
@@ -88,8 +121,9 @@ Show the pvalue (empirical p-value calculated using a Z-test) of the connectivit
 results.connectivity[['5']][['cc.1']]$pval
 ```
 
-Explore the regulatory core network (modulon 5 cc.1):
-```{r plot network modulon 5 cc.1, results='hide'}
+Display the network of a regulatory core:
+
+```{r plot network modulon 5 cc.1, fig.height = 5, fig.width = 8, fig.align = "center",dpi=1200, echo=T, results='hide',warning=FALSE,message=FALSE}
 # Extract the subnetwork
 net = igraph::subgraph(igraph,vids = cc[['5']][['cc.1']])
 net = igraph::simplify(net,remove.multiple = T)
@@ -97,51 +131,16 @@ l <- igraph::layout_in_circle(net)
 # Calculate node outdegree to use define the node size
 deg <- igraph::degree(net, mode="out")
 plot(net, layout=l,vertex.size=5 + deg*2,vertex.label.color="black", vertex.label.dist=c(-3,3), edge.arrow.size=.4,vertex.color = adjustcolor("SkyBlue2", alpha.f = .5))
-
-pdf(file="./net.5.cc.1.pdf",height = 6,width = 6)
-plot(net, layout=l,vertex.size=5 + deg*2,vertex.label.color="black", vertex.label.dist=c(-3,3), edge.arrow.size=.4,vertex.color = adjustcolor("SkyBlue2", alpha.f = .5))
-dev.off()
 ```
 
-Big nodes correspond with with transcription factors with high outdegree.
-
-
-Plot the results of the connectivity analysis for the regulatory core of modulon 3
-```{r plot connectivity modulon 3 cc.3}
-# Explore results for modulon 3
-plot(results.connectivity[['3']][['cc.3']])
-```
-The connectivity of the connected component cc.3 from modulon 3 is evaluated using the area under the Knet-function (AUK) by comparison of the connectivity of the regulatory core against random subnetworks of the same size derived from the global transcriptional network inferred with SCENIC. An empirical p-value is calculated using a Z-test
-
-Show the pvalue (empirical p-value calculated using a Z-test) of the connectivity analysis for the regulatory core of modulon 3
-```{r pvalue connectivity modulon 3 cc.3}
-# pvalue
-results.connectivity[['3']][['cc.3']]$pval
-```
-
-Explore the regulatory core network (modulon 3 cc.3):
-```{r plot network modulon 3 cc.3, results='hide'}
-# Extract the subnetwork
-net = igraph::subgraph(igraph,vids = cc[['3']][['cc.3']])
-net = igraph::simplify(net,remove.multiple = T)
-l <- igraph::layout_in_circle(net)
-# Calculate node outdegree to use define the node size
-deg <- igraph::degree(net, mode="out")
-plot(net, layout=l,vertex.size=5 + deg*2,vertex.label.color="black", vertex.label.dist=c(-3,3), edge.arrow.size=.4,vertex.color = adjustcolor("SkyBlue2", alpha.f = .5))
-
-pdf(file="./net.3.cc.3.pdf",height = 6,width = 6)
-plot(net, layout=l,vertex.size=5 + deg*2,vertex.label.color="black", vertex.label.dist=c(-3,3), edge.arrow.size=.4,vertex.color = adjustcolor("SkyBlue2", alpha.f = .5))
-dev.off()
-```
-Big nodes correspond with with transcription factors with high outdegree.
+The node size is related with the outdegree; bigger nodes have a greater outdegree.
 
 ## Author
 
 Isaac Crespo
 
-```{r pressure, echo = FALSE}
-plot(pressure)
-#<img src="man/figures/README-isaaccrespo_WEB_big.jpg" width="30%" />
+```{r , out.width="30%",echo=F}
+knitr::include_graphics("./man/figures/README-isaaccrespo_WEB_big.jpg")
 ```
 
 Isaac Crespo, phD  
@@ -150,4 +149,3 @@ CHUV | Department of Oncology | George Coukos group
 Ludwig Institute for Cancer Research |  Lausanne Branch  
 AGORA, Bugnon 25A, 1005 Lausanne, 4th floor, Room 026  
 isaaccrespo@hotmail.com
-

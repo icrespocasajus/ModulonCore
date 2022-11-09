@@ -1,0 +1,5 @@
+Source	Interaction	Target
+Stat2	->	Mtf1
+Stat2	->	Pml
+Pitx2	->	Mtf1
+Rfx5	->	Pml

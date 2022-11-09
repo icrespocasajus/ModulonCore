@@ -1,0 +1,5 @@
+Source	Interaction	Target
+Myc	->	Zfp286
+Erg	->	Hoxc8
+Scrt1	->	Zfp286
+Hoxc8	->	Myc

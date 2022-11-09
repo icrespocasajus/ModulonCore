@@ -1,0 +1,5 @@
+Source	Interaction	Target
+Zbtb14	->	Rfx3
+Rfx3	->	Dbp
+Myod1	->	Rfx3
+Hsf1	->	Rfx3

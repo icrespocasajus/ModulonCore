@@ -1,0 +1,7 @@
+Source	Interaction	Target
+Crem	->	Maf
+Crem	->	Gtf2f1
+Tbx21	->	Crem
+Tbx21	->	Runx3
+Runx3	->	Fli1
+Gtf2f1	->	Gabpb1

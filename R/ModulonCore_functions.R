@@ -59,7 +59,7 @@ build.igraph = function(net){
   # Network in igraph format
   network.igraph = igraph::graph_from_edgelist(as.matrix(network[c(1:2)]))
   igraph::E(network.igraph)$Weight = network$Weight
-  network.igraph = igraph::simplify(network.igraph,remove.multiple = T,remove.loops = T)
+  network.igraph = igraph::simplify(network.igraph,remove.multiple = T,remove.loops = T,edge.attr.comb='first')
   return(network.igraph)
 }
 
@@ -68,7 +68,7 @@ build.igraph = function(net){
 #' @param net A network as an igraph object
 #' @param modulons A list with as many elements as modulons/clusters containing the constituent elements.
 #' @return A list with as many elements as modulons/clusters containing  all the connected components
-#' @details The names of connected components are encoded as ccX, being 'X' the ID number of the connected component
+#' @details The names of connected components are encoded as cc.X, being 'X' the ID number of the connected component
 #' @examples 
 #' \dontrun{
 #' if(interactive()){
@@ -79,12 +79,10 @@ build.igraph = function(net){
 #' }
 #' @rdname find.connected.components
 #' @export 
-find.connected.components <- function(net, modulons,mode=MODE,dir=DIR) {
+find.connected.components <- function(net, modulons,mode="weak",dir=DIR) {
   
-  mode <- match.arg(mode) # default = "weak"
-
   # Query
-  TF.AUC.clusters.TILs=modulons
+  TF.AUC.clusters.TILs = modulons
   
   # Extract all modulon subnetworks as igraph object
   modulon.subnetworks.igraph = lapply(TF.AUC.clusters.TILs,function(x){
@@ -93,9 +91,11 @@ find.connected.components <- function(net, modulons,mode=MODE,dir=DIR) {
  
   # Extract all modulon subnetworks connected components
   modulon.subnetworks.connected.components = lapply(modulon.subnetworks.igraph,function(x){
-    res=igraph::components(x, mode = c(mode))
+    res = igraph::components(x, mode = c(mode))
     membership.df = as.data.frame(res$membership)
+    size.df = as.data.frame(res$csize)
     connected.components.list = split(rownames(membership.df),membership.df[1])
+    connected.components.list = connected.components.list[size.df[names(connected.components.list),1] > 1]
     return(connected.components.list)
   })
   # Rename connected components
@@ -198,7 +198,7 @@ core <- function(results.connectivity,significance=0.05) {
       cc.tmp = names(modulon.subnetworks.connected.components.SANTA[[modulon.tmp]])[j]
       # print(as.numeric(modulon.subnetworks.connected.components.SANTA[[modulon.tmp]][[cc.tmp]]['pval'] ))
       pval.tmp = as.numeric(modulon.subnetworks.connected.components.SANTA[[modulon.tmp]][[cc.tmp]]['pval'] )
-      print(paste('Modulon: ',modulon.tmp,'   Connected component: ',cc.tmp,'   pvalue: ',pval.tmp))
+      #print(paste('Modulon: ',modulon.tmp,'   Connected component: ',cc.tmp,'   pvalue: ',pval.tmp))
       if(pval.tmp <= significance){
         regulatory.cores=c(regulatory.cores,paste(modulon.tmp,cc.tmp,sep = ('__')))
       }
@@ -215,7 +215,7 @@ core <- function(results.connectivity,significance=0.05) {
 #' @param cc Connected components generated with find.connected.components()
 #' @param regulatory.cores Regulatory cores as the output of core()
 #' @param dir Output directory
-#' @return Files with regulatory core networks and constituent elements printed out to the output directory
+#' @return Files with regulatory core networks and constituent elements printed out to the output directory, and a list with all the regulatory core networks
 #' @details The name of each file contains the corresponding modulon and connected component
 #' @examples 
 #' \dontrun{
@@ -230,7 +230,7 @@ core <- function(results.connectivity,significance=0.05) {
 #'  edge.attr="Weight",
 #'  significance=0.05)
 #'  regulatory.cores=core(results.connectivity=results.connectivity)
-#'  core.out(net=graph,cc=cc,regulatory.cores=regulatory.cores,dir="./cores")
+#'  regulatory.core.networks=core.out(net=graph,cc=cc,regulatory.cores=regulatory.cores,dir="./cores")
 #'  }
 #' }
 #' @rdname core.out
@@ -238,6 +238,7 @@ core <- function(results.connectivity,significance=0.05) {
 core.out = function(net,cc,regulatory.cores,dir = "./") {
   SANTA.INPUT=cc
   dir.create(dir)
+  regulatory.core.networks = list()
   for(i in 1:length(regulatory.cores)){
     regulatory.core.tmp = regulatory.cores[i]
     modulon.tmp = strsplit2(regulatory.core.tmp, '__')[,1]
@@ -245,53 +246,13 @@ core.out = function(net,cc,regulatory.cores,dir = "./") {
     regulatory.core.elements.tmp=SANTA.INPUT[[modulon.tmp]][[cc.tmp]]
     write(file=paste(dir,"/Regulatory.Core.Modulon.",modulon.tmp,'_',cc.tmp,'.nodes.txt',sep = ''),regulatory.core.elements.tmp)
     network.tmp = net[((net$Source %in% regulatory.core.elements.tmp) & (net$Target %in% regulatory.core.elements.tmp)),]
+    network.tmp = data.frame(Source=network.tmp[,1],Interaction='->',Target=network.tmp[,2])
     write.table(file=paste(dir,"/Regulatory.Core.Modulon.",modulon.tmp,'_',cc.tmp,'.network.txt',sep = ''),network.tmp,quote = F,row.names = F,sep = "\t")
+    regulatory.core.networks[[regulatory.core.tmp]] = network.tmp
   }
-  
+  return(regulatory.core.networks)
 }
 
-
-
-
-#' @title Jaccard Distance
-#' @description Calculate Jaccard distance between two vectors
-#' @param a A vector.
-#' #' @param a A vector.
-#' @param b A vector.
-#' @return Jaccard distance calculated as the ratio between the intersection and the union of the two vectors.
-#' @details DETAILS
-#' @examples 
-#' \dontrun{
-#' if(interactive()){
-#'  jaccard(c('A','B','C','D','E'), c('A','B','C'))
-#'  }
-#' }
-#' @rdname jaccard
-#' @export 
-jaccard <- function(a, b) {
-  intersection = length(intersect(a, b))
-  union = length(a) + length(b) - intersection
-  return (intersection/union)
-}
-#' @title Regulon Redundancy
-#' Calculate redundancy between two regulons
-#' @param a A vector
-#' @param b A vector
-#' @return Redundancy calculated as the ratio between the intersection and the minimum length of the two vectors.
-#' @details DETAILS
-#' @examples 
-#' \dontrun{
-#' if(interactive()){
-#' redundancy(c('A','B','C','D','E'), c('A','B','C'))
-#'  }
-#' }
-#' @rdname redundancy
-#' @export 
-redundancy <- function(a, b) {
-  intersection = length(intersect(a, b))
-  min = min(length(a),length(b))
-  return (intersection/min)
-}
 
 
 #' @title Range between 0 and 1
@@ -308,8 +269,6 @@ redundancy <- function(a, b) {
 #' @rdname range01
 #' @export 
 range01 <- function(x){(x-min(x,na.rm = T))/(max(x,na.rm = T)-min(x,na.rm = T))}
-
-
 
 
 #' @title Split Composite Names
@@ -345,3 +304,41 @@ strsplit2 = function (x, split, ...)
 }
 
 
+#' @title Connected components table generation
+#' @description Generate a table with all the connected components and their constituent elements
+#' @param cc A list with all the connected components of each modulon.
+#' @return A table of 4 columns
+#' @details 
+#' @examples 
+#' \dontrun{
+#' if(interactive()){
+#'  cc = cc.TILs
+#'  tab.cc(cc)
+#'  }
+#' }
+#' @rdname tab.cc
+#' @export 
+tab.cc <- function(cc,cores=NULL) {
+  all.cc = c()  
+  for(i in 1:length(names(cc))) {
+    modulon.tmp = names(cc)[i]
+    cc.tmp = names(cc[[modulon.tmp]])
+    all.cc = c(all.cc,paste(modulon.tmp,cc.tmp,sep = '__'))
+    
+  }   
+  query.df = data.frame(Modulon=ModulonCore::strsplit2(all.cc,'__')[,1],Connected.Component=ModulonCore::strsplit2(all.cc,'__')[,2])
+  rownames(query.df)=all.cc
+  
+  all.sizes = c()    
+  cc.string = c()
+  for(i in 1:nrow(query.df )){
+    mod.tmp = query.df[i,'Modulon']
+    cc.tmp = query.df[i,'Connected.Component']
+    cc.string = c(cc.string,paste(sort(cc[[mod.tmp]][[cc.tmp]]),sep = ', ',collapse = ', '))
+    all.sizes = c(all.sizes,length(cc[[mod.tmp]][[cc.tmp]]))
+  }
+  table = query.df
+  table$Size = all.sizes
+  table$Elements = cc.string
+  return(table)
+}

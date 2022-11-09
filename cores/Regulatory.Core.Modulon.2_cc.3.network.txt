@@ -1,0 +1,10 @@
+Source	Interaction	Target
+Taf1	->	Nr2c2
+Elk1	->	Pou3f1
+Nr2c2	->	Pou3f1
+Nr2c2	->	Esrra
+Nr2f6	->	Esrra
+Bclaf1	->	Taf1
+Irf3	->	Elk1
+Irf3	->	Zfp740
+Pou3f2	->	Esrra

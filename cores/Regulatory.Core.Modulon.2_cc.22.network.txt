@@ -1,0 +1,11 @@
+Source	Interaction	Target
+Atf7	->	Klf16
+Zfp568	->	Pbx2
+Zscan12	->	Atf7
+Fiz1	->	Zfp523
+Taf7	->	Fiz1
+Klf16	->	Tead3
+Pbx2	->	Zfp523
+Zfp523	->	Zscan12
+Zfp523	->	Zfhx2
+Zfhx2	->	Zbtb34

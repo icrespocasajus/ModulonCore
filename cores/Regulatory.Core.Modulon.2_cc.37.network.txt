@@ -1,0 +1,6 @@
+Source	Interaction	Target
+Glis1	->	Snai1
+Mitf	->	Snai1
+Snai1	->	Myef2
+Snai1	->	Glis1
+Tff3	->	Snai1

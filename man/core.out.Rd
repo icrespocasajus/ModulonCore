@@ -16,7 +16,7 @@ core.out(net, cc, regulatory.cores, dir = "./")
 \item{dir}{Output directory}
 }
 \value{
-Files with regulatory core networks and constituent elements printed out to the output directory
+Files with regulatory core networks and constituent elements printed out to the output directory, and a list with all the regulatory core networks
 }
 \description{
 Generate files with regulatory core networks and constituent elements.
@@ -37,7 +37,7 @@ if(interactive()){
  edge.attr="Weight",
  significance=0.05)
  regulatory.cores=core(results.connectivity=results.connectivity)
- core.out(net=graph,cc=cc,regulatory.cores=regulatory.cores,dir="./cores")
+ regulatory.core.networks=core.out(net=graph,cc=cc,regulatory.cores=regulatory.cores,dir="./cores")
  }
 }
 }
