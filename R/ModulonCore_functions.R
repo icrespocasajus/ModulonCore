@@ -100,7 +100,12 @@ find.connected.components <- function(net, modulons,mode="weak",dir=DIR) {
   })
   # Rename connected components
   modulon.subnetworks.connected.components = lapply(modulon.subnetworks.connected.components,function(x){
-    names(x)=paste('cc.',names(x),sep = '')
+    if(length(names(x))>0){
+      names(x) = paste("cc.", names(x), sep = "")
+    }
+    if(length(names(x))==0){
+      x = x
+    }
     return(x)
   })
   saveRDS(file=paste(dir,"Modulon_Connected_Components.Rds",sep = ''),modulon.subnetworks.connected.components)
